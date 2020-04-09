@@ -1,4 +1,10 @@
 defmodule Roman do
+  defmacro __using__(_opts) do
+    quote do
+      import Roman.Numbers
+    end
+  end
+
   def convert(decimal) when is_integer(decimal) and decimal > 0 do
     {0, romans} = next_digit({decimal, []})
     
