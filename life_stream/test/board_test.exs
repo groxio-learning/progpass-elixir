@@ -44,13 +44,21 @@ defmodule BoardTest do
     assert as_string(board()) != as_string(generation_2())
   end
   
+  test "creates stream" do
+    life_stream = stream(board())
+    
+    expected = 
+      life_stream
+      |> Stream.drop(1)
+      |> Enum.take(1)
+      |> List.first
+      |> as_string
+    
+    assert expected == repeater_string()
+  end
+  
   test "build board from string" do
-    string = 
-      """
-      ...
-      +++
-      ...
-      """
+    string = repeater_string()
     
     assert (string |> from_string |> as_string) == string
   end
@@ -66,5 +74,13 @@ defmodule BoardTest do
   
   def generation_2(), do: repeater() |> next_generation
   def generation_3(), do: repeater() |> next_generation |> next_generation
+  
+  def repeater_string() do
+    """
+    ...
+    +++
+    ...
+    """
+  end
   
 end

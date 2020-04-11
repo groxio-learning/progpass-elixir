@@ -10,6 +10,14 @@ defmodule LifeStreamTest do
     assert LifeStream.as_string(second_generation) == even()
   end
   
+  test "as string converts to string" do
+    actual = 
+      LifeStream.Board.repeater()
+      |> LifeStream.as_string
+      
+    assert actual == even()
+  end
+  
   def odd() do
     """
     ...
