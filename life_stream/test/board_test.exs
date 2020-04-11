@@ -39,11 +39,22 @@ defmodule BoardTest do
     assert as_string(generation_2()) == expected
   end
 
-  
   test "repeat every other generation" do
     assert as_string(board()) == as_string(generation_3())
     assert as_string(board()) != as_string(generation_2())
   end
+  
+  test "build board from string" do
+    string = 
+      """
+      ...
+      +++
+      ...
+      """
+    
+    assert (string |> from_string |> as_string) == string
+  end
+  
   
   def board(), do: repeater()
   

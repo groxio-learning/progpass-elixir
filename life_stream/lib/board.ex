@@ -88,4 +88,50 @@ defmodule LifeStream.Board do
     |> Enum.take(1)
     |> hd
   end
+  
+  def from_string(string) do
+    %__MODULE__{
+      height: height(string), 
+      width: width(string), 
+      grid: grid(string)
+    }
+  end
+
+  defp grid(string) do
+    string
+    |> String.trim
+    |> String.split("\n")
+    |> Enum.with_index(1)
+    |> Enum.map(&to_board_row/1)
+    |> List.flatten
+    |> Map.new
+  end
+  
+  defp height(string) do
+    string
+    |> String.trim
+    |> String.split("\n")
+    |> Enum.count
+  end
+  
+  defp width(string) do
+    string
+    |> String.trim
+    |> String.split("\n")
+    |> Enum.map(&String.length/1) 
+    |> Enum.max
+  end
+  
+  defp to_board_row({string, y}) do
+    string
+    |> String.to_charlist
+    |> Enum.map(&char_to_state/1)
+    |> Enum.with_index(1)
+    |> Enum.map(fn {state, x} ->
+       {{x, y}, state} 
+    end)
+  end
+  
+  defp char_to_state(?.), do: :dead
+  defp char_to_state(?+), do: :live
 end

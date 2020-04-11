@@ -2,7 +2,27 @@ defmodule LifeStreamTest do
   use ExUnit.Case
   doctest LifeStream
 
-  test "greets the world" do
-    assert LifeStream.hello() == :world
+  test "generates nth generation from string" do
+    first_generation = LifeStream.nth(odd(), 1)
+    second_generation = LifeStream.nth(odd(), 2)
+    
+    assert LifeStream.as_string(first_generation) == odd()
+    assert LifeStream.as_string(second_generation) == even()
   end
+  
+  def odd() do
+    """
+    ...
+    +++
+    ...
+    """
+  end
+  def even() do
+    """
+    .+.
+    .+.
+    .+.
+    """
+  end
+  
 end
