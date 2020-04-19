@@ -12,14 +12,14 @@ defmodule RulesTest do
     assert next_cell(3, :dead) == :live
   end
   
-  test "<2 neighbors diex" do
+  test "<2 neighbors dies" do
     assert next_cell(1, :live) == :dead
     assert next_cell(1, :dead) == :dead
     assert next_cell(0, :live) == :dead
     assert next_cell(0, :dead) == :dead
   end
   
-  test ">3 neighbors diex" do
+  test ">3 neighbors diexs" do
     assert next_cell(4, :live) == :dead
     assert next_cell(4, :dead) == :dead
     assert next_cell(5, :live) == :dead
